@@ -19,7 +19,7 @@ public class SongModel
         _songList.Add( new Song(new SongName("Name42"), new SongAuthor("Author4")));
         _songList.Add( new Song(new SongName("Name43"), new SongAuthor("Author4")));
     }
-    public List<Song> FindExactSong(SongName searchSongName, SongAuthor searchSongAuthor)
+    public async Task<List<Song>> FindSongByFull(SongName searchSongName, SongAuthor searchSongAuthor)
     {
         //возвращаем песню по точному совпадению имени / автора
             return _songList
@@ -27,7 +27,7 @@ public class SongModel
     }
 
     // Метод, который возвращает список песен, если заполнено только одно из полей
-    public List<Song> FindSongsByOneField(SongName searchSongName)
+    public async Task<List<Song>> FindSongsByName(SongName searchSongName)
     {
         Console.WriteLine("Looking for songs by name");
         // Если заполнено только поле Name
@@ -41,5 +41,11 @@ public class SongModel
         Console.WriteLine("No songs found");
         // Если ни одно поле не заполнено, возвращаем пустой список
         return new List<Song>();
+    }
+
+    public async Task RemoveSong()
+    {
+        Console.WriteLine("Removing song");
+        throw new NotImplementedException();
     }
 }

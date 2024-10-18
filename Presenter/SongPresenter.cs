@@ -18,13 +18,13 @@ public class SongPresenter : ISongPresenter
     // Метод для проверки, что оба поля (name и author) не null или пусты
     public async Task CheckFullDataInput(string name, string author)
     {
-        await Task.Run(() =>
+        
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(author))
         {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(author))
-            {
-                throw new ArgumentException("Both name and author must be provided and not null.");
-            }
-        });
+            throw new ArgumentException("Both name and author must be provided and not null.");
+        }
+
+        throw new NotImplementedException();
     }
 
     // Метод для проверки, что хотя бы одно из полей (name или author) не null или пустое
@@ -54,13 +54,13 @@ public class SongPresenter : ISongPresenter
             string[] parts = findBy.Split(" - ");
             SongName songName = new SongName(parts[0]);
             SongAuthor songAuthor = new SongAuthor(parts[1]);
-            songs = _songModel.FindExactSong(songName, songAuthor);
+            songs =  await _songModel.FindSongByFull(songName, songAuthor);
             Console.WriteLine("Added Songs to found list");
         }
         else
         {
             Console.WriteLine("Found name only");
-            songs = _songModel.FindSongsByOneField(new SongName(findBy));
+            songs = await _songModel.FindSongsByName(new SongName(findBy));
             Console.WriteLine("Added Songs to found list");
         }
         return songs;

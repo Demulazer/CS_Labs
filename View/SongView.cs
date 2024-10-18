@@ -15,7 +15,7 @@ public class SongView : ISongView
     {
         Dictionary<int, Func<Task>> methodDictionary; 
         Dictionary<int, string > nameDictionary;
-        // Словарь с методами
+        // Словарь с ссылками на методы для меню
         methodDictionary = new Dictionary<int, Func<Task>>
         {
             { 1, ShowAllSongs },
@@ -27,10 +27,10 @@ public class SongView : ISongView
         // Словарь с именами методов
         nameDictionary = new Dictionary<int, string>
         {
-            { 1, "ShowAllSongs" },
-            { 2, "AddSong" },
-            { 3, "RemoveSong" },
-            { 4, "SearchSong" }
+            { 1, "Show All Songs" },
+            { 2, "Add Song" },
+            { 3, "Remove Song" },
+            { 4, "Search Song" }
         };
         var menuView = new Menu(methodDictionary, nameDictionary);
         await menuView.DisplayHelp();
@@ -49,7 +49,12 @@ public class SongView : ISongView
 
     public async Task RemoveSong()
     {
-        await Task.Run(() => Console.WriteLine(" "));
+        Console.WriteLine("Введите автора песни");
+        var songAuthor = Console.ReadLine();
+        // TODO - сделать вывод всех песен этого автора для удаления, норм не норм?
+        Console.WriteLine("Введите название песни");
+        var songName = Console.ReadLine();
+        await _songPresenterLink.CheckFullDataInput(songName, songAuthor);
     }
 
     public async Task<List<Song>> SearchSong()

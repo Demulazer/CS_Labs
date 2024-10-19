@@ -60,10 +60,10 @@ public class SongView : ISongView
     public async Task<List<Song>> SearchSong()
     {
         
-        List<Song> songs = null;
+        List<Song> songs;
         Console.WriteLine("Введите название песни для поиска");
         var searchQuery = Console.ReadLine();
-        songs = await _songPresenterLink.SplitSongNameForSearch(searchQuery);
+        songs = await _songPresenterLink.SongSearchPresenter(searchQuery);
         Console.WriteLine("Successfully returned with a list of songs");
         
         

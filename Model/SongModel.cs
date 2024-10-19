@@ -10,14 +10,14 @@ public class SongModel
     public SongModel()
     {
         _songList = new List<Song>();
-        _songList.Add( new Song(new SongName("Name1"), new SongAuthor("Author1")));
-        _songList.Add( new Song(new SongName("Name2"), new SongAuthor("Author2")));
-        _songList.Add( new Song(new SongName("Name3"), new SongAuthor("Author3")));
-        _songList.Add( new Song(new SongName("Name4"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new SongName("Name4"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new SongName("Name41"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new SongName("Name42"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new SongName("Name43"), new SongAuthor("Author4")));
+        _songList.Add( new Song(new Guid(), new SongName("Name1"), new SongAuthor("Author1")));
+        _songList.Add( new Song(new Guid(), new SongName("Name2"), new SongAuthor("Author2")));
+        _songList.Add( new Song(new Guid(), new SongName("Name3"), new SongAuthor("Author3")));
+        _songList.Add( new Song(new Guid(), new SongName("Name4"), new SongAuthor("Author4")));
+        _songList.Add( new Song(new Guid(), new SongName("Name4"), new SongAuthor("Author4")));
+        _songList.Add( new Song(new Guid(), new SongName("Name41"), new SongAuthor("Author4")));
+        _songList.Add( new Song(new Guid(), new SongName("Name42"), new SongAuthor("Author4")));
+        _songList.Add( new Song(new Guid(), new SongName("Name43"), new SongAuthor("Author4")));
     }
     public async Task<List<Song>> FindSongByFull(SongName searchSongName, SongAuthor searchSongAuthor)
     {
@@ -43,9 +43,21 @@ public class SongModel
         return new List<Song>();
     }
 
-    public async Task RemoveSong()
+    public async Task RemoveSong(Song song )
     {
         Console.WriteLine("Removing song");
+        _songList.Remove(song); 
         throw new NotImplementedException();
+    }
+
+    public async Task<Song> CheckSong(SongName songName, SongAuthor songAuthor)
+    {
+        Console.WriteLine("Checking song");
+        foreach (var song in _songList)
+        {
+            if (songName.Name == song.SongName.Name && song.SongAuthor.Author == songAuthor.Author) return song;
+        }
+
+        return null;
     }
 }

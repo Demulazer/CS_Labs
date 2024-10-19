@@ -28,19 +28,22 @@ public class SongPresenter : ISongPresenter
     }
 
     // Метод для проверки, что хотя бы одно из полей (name или author) не null или пустое
-    public async Task CheckDataInput(string name, string author)
+    public async Task RemoveSongPresenter(string name, string author)
     {
-        await Task.Run(() =>
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(author))
         {
-            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(author))
-            {
-                throw new ArgumentException("Either name or author must be provided and not null.");
-            }
-        });
+            throw new ArgumentException("Both name and author must be provided and not null.");
+        }
+        Song song = await _songModel.CheckSong(new SongName(name), new SongAuthor(author));
+        if (song == null)
+        {
+            throw new ArgumentException("Specified song does not exist.");
+        }
+        await _songModel.RemoveSong(song);
     }
 
     // Метод для проверки доступности песни (например, поиск по имени или автору)
-    public async Task<List<Song>> SplitSongNameForSearch(string findBy)
+    public async Task<List<Song>> SongSearchPresenter(string findBy)
     {
         Console.WriteLine("Song is being processed");
         if (string.IsNullOrEmpty(findBy))

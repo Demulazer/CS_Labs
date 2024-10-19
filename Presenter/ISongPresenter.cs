@@ -3,7 +3,7 @@ using Model;
 public interface ISongPresenter
 {
     Task CheckFullDataInput(string name, string author);
-    Task CheckDataInput(string name, string author);
-    Task<List<Song>> SplitSongNameForSearch(string findBy);
+    Task RemoveSongPresenter(string name, string author);
+    Task<List<Song>> SongSearchPresenter(string findBy);
     Task CheckIdenticalSong();
 }

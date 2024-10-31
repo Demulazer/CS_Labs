@@ -39,12 +39,22 @@ public class SongView : ISongView
 
     public async Task ShowAllSongs()
     {
-        await Task.Run(() => Console.WriteLine(" "));
+        Console.WriteLine("Идём за всеми песнями");
+        var songList = await _songPresenterLink.ShowSongPresenter();
+        foreach (var song in songList)
+        {
+            Console.WriteLine(song.SongName.Name + " - " + song.SongAuthor.Author);
+        }
     }
 
     public async Task AddSong()
-    {
-        await Task.Run(() => Console.WriteLine(" "));
+    { 
+        Console.WriteLine("Введите автора песни");
+        var songAuthor = Console.ReadLine();
+        Console.WriteLine("Введите название песни");
+        var songName = Console.ReadLine();
+        await _songPresenterLink.AddSongPresenter(songName, songAuthor);
+        Console.WriteLine();
     }
 
     public async Task RemoveSong()
@@ -54,7 +64,7 @@ public class SongView : ISongView
         // TODO - сделать вывод всех песен этого автора для удаления, норм не норм?
         Console.WriteLine("Введите название песни");
         var songName = Console.ReadLine();
-        await _songPresenterLink.CheckFullDataInput(songName, songAuthor);
+        await _songPresenterLink.RemoveSongPresenter(songName, songAuthor);
     }
 
     public async Task<List<Song>> SearchSong()

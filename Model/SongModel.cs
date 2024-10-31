@@ -47,7 +47,6 @@ public class SongModel
     {
         Console.WriteLine("Removing song");
         _songList.Remove(song); 
-        throw new NotImplementedException();
     }
 
     public async Task<Song> CheckSong(SongName songName, SongAuthor songAuthor)
@@ -55,9 +54,21 @@ public class SongModel
         Console.WriteLine("Checking song");
         foreach (var song in _songList)
         {
-            if (songName.Name == song.SongName.Name && song.SongAuthor.Author == songAuthor.Author) return song;
+            if (songName.Name == song.SongName.Name && song.SongAuthor.Author == songAuthor.Author) 
+                return song;
         }
 
         return null;
+    }
+
+    public async Task<List<Song>> ShowSongs()
+    {
+        Console.WriteLine("Returning with songs");
+        return _songList;
+    }
+
+    public async Task AddSong(Song song)
+    { 
+        _songList.Add(song);
     }
 }

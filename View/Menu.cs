@@ -33,7 +33,7 @@ public class Menu : IMenu
         }
     }
 
-    private int GetInput()
+    private int GetInput() 
     {
         var userInput = int.Parse(Console.ReadLine());
         bool validUserInput = false;

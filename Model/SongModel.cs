@@ -3,15 +3,10 @@ namespace Model;
 
 public class SongModel
 {
-    private List<Song> _songList;
     private readonly FileStorage _fileStorage = new();
+    private List<Song> _songList;
     
-    public SongModel()
-    {
-        LoadSongListFromFile();
-    }
-
-    private async Task LoadSongListFromFile()
+    public async Task InitializeSongListFromFile()
     {
         _songList = await _fileStorage.InitializeFromFile();
     }

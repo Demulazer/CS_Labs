@@ -6,6 +6,11 @@ public class SongPresenter : ISongPresenter
 {
     private readonly SongModel _songModelLink = new();
 
+    public SongPresenter()
+    {
+        _songModelLink.InitializeSongListFromFile();
+    }
+
 
     public async Task RemoveSongPresenter(string name, string author)
     {

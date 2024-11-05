@@ -36,7 +36,15 @@ public class Menu : IMenu
     private async Task<int> GetInput()
     {
         Console.WriteLine("Debug - we are in GetInput()");
-        var userInput = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+        int userInput;
+        var checkInt = int.TryParse(Console.ReadLine(), out userInput);
+        if (userInput == 0)
+        {
+            Console.WriteLine("Invalid input");
+            return 1;
+        }
+
+        
         var validUserInput = false;
         foreach (var key in _tasks.Keys)
             if (key == userInput)

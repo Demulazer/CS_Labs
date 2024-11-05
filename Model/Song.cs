@@ -1,3 +1,3 @@
 namespace Model;
 
-public record Song(Guid Id, SongName SongName, SongAuthor SongAuthor);
+public record Song(int Id, SongName SongName, SongAuthor SongAuthor);

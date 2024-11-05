@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Oy2OKjSPPW0=",
+  "dgSpecHash": "q1t/yU558pw=",
   "success": true,
   "projectFilePath": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/demulazer/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

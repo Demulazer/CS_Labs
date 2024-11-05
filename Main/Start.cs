@@ -8,6 +8,5 @@ public class Start
     {
         var songView = new SongView();
         songView.InitializeMenu();
-        
     }
 }

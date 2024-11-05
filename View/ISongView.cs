@@ -1,5 +1,7 @@
-namespace TestLib;
 using Model;
+
+namespace TestLib;
+
 public interface ISongView
 {
     Task ShowAllSongs();

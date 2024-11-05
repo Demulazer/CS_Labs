@@ -1,52 +1,53 @@
 ﻿namespace TestLib;
+
 // View = взаимодействие с пользователем
 public class Menu : IMenu
 {
-    private Dictionary<int, Func<Task>> _tasks;
-    private Dictionary<int, string> _tasksNames;
+    private readonly Dictionary<int, Func<Task>> _tasks;
+    private readonly Dictionary<int, string> _tasksNames;
 
     public Menu(Dictionary<int, Func<Task>> tasks, Dictionary<int, string> tasksNames)
     {
         _tasks = tasks;
         _tasksNames = tasksNames;
-        
     }
+
     public async Task DisplayHelp()
     {
-        Console.WriteLine("Welcome");
         foreach (var key in _tasks.Keys)
-        {
             Console.WriteLine(key + " - " + _tasksNames[key]);
-        }
-        await OptionsLoop();
     }
 
     public async Task OptionsLoop()
     {
-        Console.WriteLine("Awaiting first input");
-        var readline = GetInput();
-        while(readline != -1)
+        do
         {
+            await DisplayHelp();
+            var readline = GetInput();
             await _tasks[readline]();
-            Console.WriteLine("awaiting consecutive inputs");
-            readline = GetInput();
-        }
+            Console.WriteLine("press any key to continue");
+            var key = Console.ReadKey();
+            if(key.Key != ConsoleKey.Enter)Console.WriteLine("cheese");
+            Console.WriteLine("Read key successfully");
+            Console.Clear();
+        } while (true);
     }
 
-    private int GetInput() 
+    private int GetInput()
     {
-        var userInput = int.Parse(Console.ReadLine());
-        bool validUserInput = false;
+        Console.WriteLine("Debug - we are in GetInput()");
+        var userInput = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+        var validUserInput = false;
         foreach (var key in _tasks.Keys)
-        {
-            if(key == userInput) validUserInput = true;
-        }
+            if (key == userInput)
+                validUserInput = true;
 
         if (!validUserInput)
         {
             Console.WriteLine("Please enter a valid number");
-            return -1;
+            return 1;
         }
+
         return userInput;
     }
 }

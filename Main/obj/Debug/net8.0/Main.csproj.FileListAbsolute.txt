@@ -20,3 +20,4 @@
 /home/demulazer/RiderProjects/Tests/Main/obj/Debug/net8.0/Main.pdb
 /home/demulazer/RiderProjects/Tests/Main/obj/Debug/net8.0/Main.genruntimeconfig.cache
 /home/demulazer/RiderProjects/Tests/Main/obj/Debug/net8.0/ref/Main.dll
+/home/demulazer/RiderProjects/Tests/Main/bin/Debug/net8.0/Newtonsoft.Json.dll

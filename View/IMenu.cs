@@ -4,5 +4,4 @@ public interface IMenu
 {
     Task DisplayHelp();
     Task OptionsLoop();
-    
 }

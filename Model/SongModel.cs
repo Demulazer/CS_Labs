@@ -1,74 +1,79 @@
+
 namespace Model;
 
 public class SongModel
 {
     private readonly List<Song> _songList;
-    public SongModel(List<Song> songList)
-    {
-        _songList = songList;
-    }
+    private readonly FileStorage _fileStorage = new();
+    
     public SongModel()
     {
-        _songList = new List<Song>();
-        _songList.Add( new Song(new Guid(), new SongName("Name1"), new SongAuthor("Author1")));
-        _songList.Add( new Song(new Guid(), new SongName("Name2"), new SongAuthor("Author2")));
-        _songList.Add( new Song(new Guid(), new SongName("Name3"), new SongAuthor("Author3")));
-        _songList.Add( new Song(new Guid(), new SongName("Name4"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new Guid(), new SongName("Name4"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new Guid(), new SongName("Name41"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new Guid(), new SongName("Name42"), new SongAuthor("Author4")));
-        _songList.Add( new Song(new Guid(), new SongName("Name43"), new SongAuthor("Author4")));
+        _fileStorage.InitializeFromFile(out _songList);
+    }
+
+    public async Task<Song> GetSongById(int id)
+    {
+        foreach (var song in _songList)
+        {
+            if (song.Id == id)
+                return song;
+        }
+        return null;
+    }
+    public int GetLastId()
+    {
+        return _songList.Last().Id;
     }
     public async Task<List<Song>> FindSongByFull(SongName searchSongName, SongAuthor searchSongAuthor)
     {
         //возвращаем песню по точному совпадению имени / автора
-            return _songList
-                .Where(song => song.SongName.Name.Contains(searchSongName.Name) && song.SongAuthor.Author == searchSongAuthor.Author).ToList() ?? throw new InvalidOperationException();
+        return _songList
+                   .Where(song => song.SongName.Name.Contains(searchSongName.Name) &&
+                                  song.SongAuthor.Author == searchSongAuthor.Author).ToList() ??
+               throw new InvalidOperationException();
     }
 
     // Метод, который возвращает список песен, если заполнено только одно из полей
     public async Task<List<Song>> FindSongsByName(SongName searchSongName)
     {
-        Console.WriteLine("Looking for songs by name");
-        // Если заполнено только поле Name
-        if (!string.IsNullOrEmpty(searchSongName.Name))
-        {
-            Console.WriteLine("we must be stuck?");
-            return _songList
-                .Where(song => song.SongName.Name == searchSongName.Name || song.SongName.Name.Contains(searchSongName.Name))
-                .ToList();
-        }
-        Console.WriteLine("No songs found");
-        // Если ни одно поле не заполнено, возвращаем пустой список
-        return new List<Song>();
+        return _songList
+            .Where(song =>
+                song.SongName.Name == searchSongName.Name || song.SongName.Name.Contains(searchSongName.Name))
+            .ToList();
     }
 
-    public async Task RemoveSong(Song song )
+    public async Task RemoveSong(Song song)
     {
-        Console.WriteLine("Removing song");
-        _songList.Remove(song); 
+        await Task.Run(() =>
+        {
+            _songList.Remove(song);
+            _fileStorage.UpdateFile(_songList);
+        });
     }
 
     public async Task<Song> CheckSong(SongName songName, SongAuthor songAuthor)
     {
-        Console.WriteLine("Checking song");
         foreach (var song in _songList)
-        {
-            if (songName.Name == song.SongName.Name && song.SongAuthor.Author == songAuthor.Author) 
+            if (songName.Name == song.SongName.Name && song.SongAuthor.Author == songAuthor.Author)
                 return song;
-        }
-
-        return null;
+        return null!;
     }
 
     public async Task<List<Song>> ShowSongs()
     {
-        Console.WriteLine("Returning with songs");
+        foreach (var song in _songList)
+        {
+            Console.WriteLine("yes - " + song.SongName.Name);
+        }
         return _songList;
     }
 
     public async Task AddSong(Song song)
-    { 
+    {
+        //TODO - как сюда асинхронность то добавить, через Task.Run()?
         _songList.Add(song);
+        _fileStorage.UpdateFile(_songList);
     }
+    
+    
 }

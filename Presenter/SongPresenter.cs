@@ -4,21 +4,16 @@ namespace Presenter;
 
 public class SongPresenter : ISongPresenter
 {
-    private readonly SongModel _songModelLink;
+    private readonly SongModel _songModelLink = new();
 
 
-    public SongPresenter()
-    {
-        _songModelLink = new SongModel();
-    }
-
-    // Метод для проверки, что хотя бы одно из полей (name или author) не null или пустое
     public async Task RemoveSongPresenter(string name, string author)
     {
         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(author))
             throw new ArgumentException("Both name and author must be provided and not null.");
         var song = await _songModelLink.CheckSong(new SongName(name), new SongAuthor(author));
-        if (song == null) throw new ArgumentException("Specified song does not exist.");
+        if (song == null)
+            throw new ArgumentException("Specified song does not exist.");
         await _songModelLink.RemoveSong(song);
     }
     public async Task RemoveSongPresenter(int id)
@@ -27,15 +22,15 @@ public class SongPresenter : ISongPresenter
         var song = await _songModelLink.GetSongById(id);
         Console.WriteLine("Debug - we are still in RemoveSongPresenter, id branch, found song by id");
         if(song == null) 
-            throw new ArgumentException("Specified song does not exist.");
-        
+            throw new ArgumentException("Specified id does not exist.");
+        Console.WriteLine("Debug - found song " + song.SongName.Name + " - " + song.SongAuthor.Author + " -- " + song.Id);
+        Console.WriteLine("Debug - trying to remove song");
         await _songModelLink.RemoveSong(song);
         Console.WriteLine("Debug - we are leaving RemoveSongPresenter, id branch");
     }
-
-    // Метод для проверки доступности песни (например, поиск по имени или автору)
+    
     public async Task<List<Song>> SongSearchPresenter(string findBy)
-    { ;
+    { 
         if (string.IsNullOrEmpty(findBy)) 
             throw new ArgumentException("The search term cannot be null or empty.");
         List<Song> songs;

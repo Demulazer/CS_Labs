@@ -4,18 +4,23 @@ namespace Model;
 
 public class FileStorage: IFileStorage
 {
-    private readonly string _filePath = "/home/demulazer/Documents/Stuff/Proga/test.json";
+    private const string FilePath = "/home/demulazer/Documents/Stuff/Proga/test.json";
 
     // Инициализация данных из JSON-файла
-    public void InitializeFromFile(out List<Song> songList)
+    public async Task<List<Song>> InitializeFromFile()
     {
-        if (File.Exists(_filePath))
+        List<Song> songList;
+        if (File.Exists(FilePath))
         {
             try
             {
-                var json = File.ReadAllText(_filePath);
+                var json = await File.ReadAllTextAsync(FilePath);
                 songList = JsonConvert.DeserializeObject<List<Song>>(json) ?? throw new InvalidOperationException();
                 Console.WriteLine("Successfully read " + songList.Count + " songs from file");
+                foreach (var song in songList)
+                {
+                    Console.WriteLine(song.Id);
+                }
             }
             catch (Exception ex)
             {
@@ -27,15 +32,16 @@ public class FileStorage: IFileStorage
         {
             songList = new List<Song>();
         }
+        return songList;
     }
 
     // Обновление JSON-файла с текущими данными
-    public void UpdateFile(List<Song> songList)
+    public async Task UpdateFile(List<Song> songList)
     {
         try
         {
             var json = JsonConvert.SerializeObject(songList, Formatting.Indented);
-            File.WriteAllText(_filePath, json);
+            await File.WriteAllTextAsync(FilePath, json);
             Console.WriteLine("File updated.");
         }
         catch (Exception ex)

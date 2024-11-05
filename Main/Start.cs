@@ -4,9 +4,9 @@ namespace Tests;
 
 public class Start
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var songView = new SongView();
-        songView.InitializeMenu();
+        await songView.InitializeMenu();
     }
 }

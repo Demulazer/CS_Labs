@@ -5,13 +5,7 @@ namespace TestLib;
 
 public class SongView : ISongView
 {
-    private readonly SongPresenter _songPresenterLink;
-
-    public SongView()
-    {
-        _songPresenterLink = new SongPresenter();
-    }
-
+    private readonly SongPresenter _songPresenterLink = new();
 
     public async Task ShowAllSongs()
     {
@@ -51,7 +45,7 @@ public class SongView : ISongView
         }
         else
         {
-            Console.WriteLine("Введите название песни");
+            Console.WriteLine("Enter song name");
             var songName = Console.ReadLine();
             await _songPresenterLink.RemoveSongPresenter(songName!, input);
         }
@@ -61,7 +55,7 @@ public class SongView : ISongView
     public async Task<List<Song>> SearchSong()
     {
         List<Song> songs;
-        Console.WriteLine("Введите название песни для поиска");
+        Console.WriteLine("Enter song name for search");
         var searchQuery = Console.ReadLine();
         songs = await _songPresenterLink.SongSearchPresenter(searchQuery);
 

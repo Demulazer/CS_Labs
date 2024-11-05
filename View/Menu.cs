@@ -24,16 +24,16 @@ public class Menu : IMenu
         {
             await DisplayHelp();
             var readline = GetInput();
-            await _tasks[readline]();
+            await _tasks[await readline]();
             Console.WriteLine("press any key to continue");
-            var key = Console.ReadKey();
-            if(key.Key != ConsoleKey.Enter)Console.WriteLine("cheese");
+            Console.ReadKey();
+            
             Console.WriteLine("Read key successfully");
             Console.Clear();
         } while (true);
     }
 
-    private int GetInput()
+    private async Task<int> GetInput()
     {
         Console.WriteLine("Debug - we are in GetInput()");
         var userInput = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());

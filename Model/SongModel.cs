@@ -3,12 +3,17 @@ namespace Model;
 
 public class SongModel
 {
-    private readonly List<Song> _songList;
+    private List<Song> _songList;
     private readonly FileStorage _fileStorage = new();
     
     public SongModel()
     {
-        _fileStorage.InitializeFromFile(out _songList);
+        LoadSongListFromFile();
+    }
+
+    private async Task LoadSongListFromFile()
+    {
+        _songList = await _fileStorage.InitializeFromFile();
     }
 
     public async Task<Song> GetSongById(int id)
@@ -18,7 +23,7 @@ public class SongModel
             if (song.Id == id)
                 return song;
         }
-        return null;
+        return null!;
     }
     public int GetLastId()
     {
@@ -44,11 +49,8 @@ public class SongModel
 
     public async Task RemoveSong(Song song)
     {
-        await Task.Run(() =>
-        {
-            _songList.Remove(song);
-            _fileStorage.UpdateFile(_songList);
-        });
+        _songList.Remove(song);
+        await _fileStorage.UpdateFile(_songList);
     }
 
     public async Task<Song> CheckSong(SongName songName, SongAuthor songAuthor)
@@ -70,9 +72,8 @@ public class SongModel
 
     public async Task AddSong(Song song)
     {
-        //TODO - как сюда асинхронность то добавить, через Task.Run()?
         _songList.Add(song);
-        _fileStorage.UpdateFile(_songList);
+        await _fileStorage.UpdateFile(_songList);
     }
     
     

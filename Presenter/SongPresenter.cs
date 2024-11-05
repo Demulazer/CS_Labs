@@ -4,11 +4,15 @@ namespace Presenter;
 
 public class SongPresenter : ISongPresenter
 {
-    private readonly SongModel _songModelLink = new();
+    private readonly ISongModel _songModelLink = new SongModel();
 
     public SongPresenter()
     {
         _songModelLink.InitializeSongListFromFile();
+    }
+    public SongPresenter(ISongModel songModel)
+    {
+        _songModelLink = songModel;
     }
 
 
@@ -25,9 +29,10 @@ public class SongPresenter : ISongPresenter
     {
         Console.WriteLine("Debug - we are in RemoveSongPresenter, id branch");
         var song = await _songModelLink.GetSongById(id);
-        Console.WriteLine("Debug - we are still in RemoveSongPresenter, id branch, found song by id");
-        if(song == null) 
-            throw new ArgumentException("Specified id does not exist.");
+        Console.WriteLine("Debug - we are still in RemoveSongPresenter, id branch, found song by id " + song);
+        if(song == null) Console.WriteLine("the song is null");
+        if (song == null)
+            throw new ArgumentException("Specified song does not exist.");
         Console.WriteLine("Debug - found song " + song.SongName.Name + " - " + song.SongAuthor.Author + " -- " + song.Id);
         Console.WriteLine("Debug - trying to remove song");
         await _songModelLink.RemoveSong(song);
@@ -55,8 +60,7 @@ public class SongPresenter : ISongPresenter
             Console.WriteLine("Debug - Found name only");
 
             songs = await _songModelLink.FindSongsByName(new SongName(findBy));
-
-            Console.WriteLine("Added " + songs.Count + " songs to found list");
+            
         }
 
         return songs;

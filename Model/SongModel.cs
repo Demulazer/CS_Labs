@@ -1,7 +1,7 @@
 
 namespace Model;
 
-public class SongModel
+public class SongModel : ISongModel
 {
     private readonly FileStorage _fileStorage = new();
     private List<Song> _songList;

@@ -24,8 +24,7 @@ public class SongView : ISongView
         var songAuthor = Console.ReadLine();
         Console.WriteLine("Введите название песни");
         var songName = Console.ReadLine();
-        var result = await _songPresenterLink.AddSongPresenter(songName!, songAuthor!);
-        Console.WriteLine(!result ? "Identical song already exists" : "Song added successfully");
+        await _songPresenterLink.AddSongPresenter(songName!, songAuthor!);
     }
 
     public async Task RemoveSong()

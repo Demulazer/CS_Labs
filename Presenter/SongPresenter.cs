@@ -30,7 +30,6 @@ public class SongPresenter : ISongPresenter
         Console.WriteLine("Debug - we are in RemoveSongPresenter, id branch");
         var song = await _songModelLink.GetSongById(id);
         Console.WriteLine("Debug - we are still in RemoveSongPresenter, id branch, found song by id " + song);
-        if(song == null) Console.WriteLine("the song is null");
         if (song == null)
             throw new ArgumentException("Specified song does not exist.");
         Console.WriteLine("Debug - found song " + song.SongName.Name + " - " + song.SongAuthor.Author + " -- " + song.Id);
@@ -73,7 +72,7 @@ public class SongPresenter : ISongPresenter
     }
 
 
-    public async Task<bool> AddSongPresenter(string songName, string songAuthor)
+    public async Task AddSongPresenter(string songName, string songAuthor)
     {
         if (string.IsNullOrEmpty(songName) || string.IsNullOrEmpty(songAuthor))
             throw new ArgumentException("Both name and author must be provided.");
@@ -81,11 +80,11 @@ public class SongPresenter : ISongPresenter
         if (await _songModelLink.CheckSong(new(songName), new(songAuthor)) != null)
         {
             Console.WriteLine("Debug - found identical song");
-            return false;
+            throw new ArgumentException("Identical song already exists");
         }
 
         var song = new Song(_songModelLink.GetLastId() + 1, new SongName(songName), new SongAuthor(songAuthor));
         await _songModelLink.AddSong(song);
-        return true;
+        
     }
 }

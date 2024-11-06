@@ -4,7 +4,7 @@ namespace Model;
 public class SongModel : ISongModel
 {
     private readonly IFileStorage _fileStorage = new FileStorage();
-    private List<Song> _songList;
+    public List<Song> _songList;
     
     public async Task InitializeSongListFromFile()
     {

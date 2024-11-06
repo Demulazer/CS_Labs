@@ -3,12 +3,20 @@ namespace Model;
 
 public class SongModel : ISongModel
 {
-    private readonly FileStorage _fileStorage = new();
+    private readonly IFileStorage _fileStorage = new FileStorage();
     private List<Song> _songList;
     
     public async Task InitializeSongListFromFile()
     {
         _songList = await _fileStorage.InitializeFromFile();
+    }
+    public SongModel ()
+    {
+
+    }
+    public SongModel (IFileStorage FileStorage)
+    {
+        _fileStorage = FileStorage;
     }
 
     public async Task<Song> GetSongById(int id)

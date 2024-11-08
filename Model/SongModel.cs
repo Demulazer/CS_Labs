@@ -35,19 +35,25 @@ public class SongModel : ISongModel
     public async Task<List<Song>> FindSongByFull(SongName searchSongName, SongAuthor searchSongAuthor)
     {
         //возвращаем песню по точному совпадению имени / автора
-        return _songList
-                   .Where(song => song.SongName.Name.Contains(searchSongName.Name) &&
-                                  song.SongAuthor.Author == searchSongAuthor.Author).ToList() ??
-               throw new InvalidOperationException();
+        var toReturn = _songList
+            .Where(song => song.SongName.Name.Contains(searchSongName.Name) &&
+                           song.SongAuthor.Author == searchSongAuthor.Author).ToList();
+        if(toReturn.Count == 0)
+               throw new InvalidOperationException("Name or Author is invalid, or found no songs. Please try again.");
+        return toReturn;
     }
 
     // Метод, который возвращает список песен, если заполнено только одно из полей
     public async Task<List<Song>> FindSongsByName(SongName searchSongName)
     {
-        return _songList
+        var toReturn = _songList
             .Where(song =>
                 song.SongName.Name == searchSongName.Name || song.SongName.Name.Contains(searchSongName.Name))
             .ToList();
+        if(toReturn.Count == 0)
+            throw new InvalidOperationException("Name is invalid, or found no songs. Please try again."); 
+        Console.WriteLine("Debug - " + toReturn.Count);
+        return toReturn;
     }
 
     public async Task RemoveSong(Song song)
@@ -68,7 +74,7 @@ public class SongModel : ISongModel
     {
         foreach (var song in _songList)
         {
-            Console.WriteLine("yes - " + song.SongName.Name);
+            Console.WriteLine("Debug - " + song.SongName.Name);
         }
         return _songList;
     }

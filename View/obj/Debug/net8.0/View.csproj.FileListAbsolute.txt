@@ -15,3 +15,4 @@
 /home/demulazer/RiderProjects/Tests/View/bin/Debug/net8.0/Model.pdb
 /home/demulazer/RiderProjects/Tests/View/obj/Debug/net8.0/View.csproj.AssemblyReference.cache
 /home/demulazer/RiderProjects/Tests/View/obj/Debug/net8.0/View.csproj.CopyComplete
+/home/demulazer/RiderProjects/Tests/View/obj/Debug/net8.0/View.sourcelink.json

@@ -66,7 +66,7 @@ public class SongModel : ISongModel
     public async Task RemoveSong(Song song)
     {
         _songList.Remove(song);
-        await _fileStorage.UpdateFile(_songList);
+        await _databaseStorage.SaveSongsToDatabaseAsync(_songList);
     }
 
     public async Task<Song> CheckSong(SongName songName, SongAuthor songAuthor)
@@ -79,6 +79,10 @@ public class SongModel : ISongModel
 
     public async Task<List<Song>> ShowSongs()
     {
+        if (_songList.Count == 0)
+        {
+            return null;
+        }
         foreach (var song in _songList)
         {
             Console.WriteLine("Debug - " + song.SongName.Name);
@@ -89,7 +93,7 @@ public class SongModel : ISongModel
     public async Task AddSong(Song song)
     {
         _songList.Add(song);
-        await _fileStorage.UpdateFile(_songList);
+        await _databaseStorage.SaveSongsToDatabaseAsync(_songList);
     }
     
     

@@ -37,3 +37,4 @@
 /home/demulazer/RiderProjects/Tests/Main/bin/Debug/net8.0/Npgsql.dll
 /home/demulazer/RiderProjects/Tests/Main/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /home/demulazer/RiderProjects/Tests/Main/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
+/home/demulazer/RiderProjects/Tests/Main/obj/Debug/net8.0/Main.sourcelink.json

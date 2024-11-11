@@ -45,12 +45,15 @@ public class DatabaseStorage
     {
         using (var connection = CreateConnection())
         {
-            const string query = "INSERT INTO Songs (SongName, SongAuthor) VALUES (@Name, @Author)";
+            const string query1 = "DELETE FROM Songs";
+            await connection.ExecuteAsync(query1, songs);
+            const string query = "INSERT INTO Songs (Id, SongName, SongAuthor) VALUES (@Id, @Name, @Author)";
                 
             foreach (var song in songs)
             {
                 await connection.ExecuteAsync(query, new 
-                { 
+                {
+                    Id = song.Id,
                     Name = song.SongName.Name, 
                     Author = song.SongAuthor.Author 
                 });

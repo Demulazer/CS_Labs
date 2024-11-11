@@ -12,9 +12,16 @@ public class SongView : ISongView
         Console.WriteLine("Retrieving songs...");
         var songList = await _songPresenterLink.ShowSongPresenter();
         Console.WriteLine("Retrieved songs...");
-        foreach (var song in songList)
+        if (songList == null)
         {
-            Console.WriteLine(song.Id + ". " + song.SongName.Name + " - " + song.SongAuthor.Author);
+            Console.WriteLine("No songs found");
+        }
+        else
+        {
+            foreach (var song in songList)
+            {
+                Console.WriteLine(song.Id + ". " + song.SongName.Name + " - " + song.SongAuthor.Author);
+            }
         }
     }
 

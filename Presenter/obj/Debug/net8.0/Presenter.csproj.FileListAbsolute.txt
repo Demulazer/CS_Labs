@@ -13,3 +13,4 @@
 /home/demulazer/RiderProjects/Tests/Presenter/obj/Debug/net8.0/refint/Presenter.dll
 /home/demulazer/RiderProjects/Tests/Presenter/obj/Debug/net8.0/Presenter.pdb
 /home/demulazer/RiderProjects/Tests/Presenter/obj/Debug/net8.0/ref/Presenter.dll
+/home/demulazer/RiderProjects/Tests/Presenter/obj/Debug/net8.0/Presenter.sourcelink.json

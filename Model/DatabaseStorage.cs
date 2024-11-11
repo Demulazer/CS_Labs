@@ -18,36 +18,45 @@ public class DatabaseStorage
 
     private IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
 
-    public async Task<List<Song>> LoadSongsAsync()
+    public async Task<List<Song>> LoadSongsFromDatabaseAsync()
     {
-        using var connection = CreateConnection();
-        const string query = "SELECT Id, SongName, SongAuthor FROM Songs";
-        
-        var result = await connection.QueryAsync<(int Id, string Name, string Author)>(query);
+        using (var connection = CreateConnection())
+        {
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs";
+                
+            var result = await connection.QueryAsync<(int Id, string Name, string Author)>(query);
 
-        // Преобразуем результат запроса в список объектов Song
-        var songs = result.Select(row =>
-            new Song(
-                row.Id,
-                new SongName(row.Name),
-                new SongAuthor(row.Author)
-            )).ToList();
+            var songs = result.Select(row =>
+                new Song(
+                    row.Id,
+                    new SongName( row.Name ),
+                    new SongAuthor(row.Author ) 
+                )).ToList();
 
-        return songs;
+            Console.WriteLine($"Successfully loaded {songs.Count} songs from the database.");
+            return songs;
+        }
     }
 
 
-    public async Task AddSongAsync(Song song)
-    {
-        using var connection = CreateConnection();
-        const string query = "INSERT INTO Songs (SongName, SongAuthor) VALUES (@Name, @Author)";
-        await connection.ExecuteAsync(query, new { Name = song.SongName.Name, Author = song.SongAuthor.Author });
-    }
 
-    public async Task DeleteSongAsync(int id)
+
+    public async Task SaveSongsToDatabaseAsync(List<Song> songs)
     {
-        using var connection = CreateConnection();
-        const string query = "DELETE FROM Songs WHERE Id = @Id";
-        await connection.ExecuteAsync(query, new { Id = id });
+        using (var connection = CreateConnection())
+        {
+            const string query = "INSERT INTO Songs (SongName, SongAuthor) VALUES (@Name, @Author)";
+                
+            foreach (var song in songs)
+            {
+                await connection.ExecuteAsync(query, new 
+                { 
+                    Name = song.SongName.Name, 
+                    Author = song.SongAuthor.Author 
+                });
+            }
+
+            Console.WriteLine("Successfully saved songs to the database.");
+        }
     }
 }

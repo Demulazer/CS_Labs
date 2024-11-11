@@ -15,7 +15,7 @@ public class SongModel : ISongModel
 
     public async Task InitializeSongListFromDatabase()
     {
-        _songList = await _databaseStorage.LoadSongsAsync();
+        _songList = await _databaseStorage.LoadSongsFromDatabaseAsync();
     }
     public SongModel ()
     {

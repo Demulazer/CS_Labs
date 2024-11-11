@@ -10,6 +10,7 @@ public interface ISongModel
     public Task<List<Song>> ShowSongs();
     public Task AddSong(Song song);
     public Task InitializeSongListFromFile();
+    public Task InitializeSongListFromDatabase();
     public int GetLastId();
 
 }

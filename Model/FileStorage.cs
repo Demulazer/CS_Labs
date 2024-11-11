@@ -17,10 +17,10 @@ public class FileStorage: IFileStorage
                 var json = await File.ReadAllTextAsync(FilePath);
                 songList = JsonConvert.DeserializeObject<List<Song>>(json) ?? throw new InvalidOperationException();
                 Console.WriteLine("Successfully read " + songList.Count + " songs from file");
-                foreach (var song in songList)
-                {
-                    Console.WriteLine(song.Id);
-                }
+                //foreach (var song in songList)
+                //{
+                //    Console.WriteLine(song.Id);
+               // }
             }
             catch (Exception ex)
             {

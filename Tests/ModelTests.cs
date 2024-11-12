@@ -7,12 +7,12 @@ namespace Tests;
 [TestFixture]
 public class ModelTests
 {
-    private Mock<IFileStorage> _storageMock;
+    private Mock<IDatabaseStorage> _storageMock;
     private SongModel _songModel;
     [SetUp]
     public void Setup()
     {
-        _storageMock = new Mock<IFileStorage>();
+        _storageMock = new Mock<IDatabaseStorage>();
         _songModel = new SongModel(_storageMock.Object);
         var songList = new List<Song>();
         var validSong = new Song(1, new SongName("name"), new SongAuthor("author"));

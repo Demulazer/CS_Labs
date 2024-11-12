@@ -3,15 +3,9 @@ namespace Model;
 
 public class SongModel : ISongModel
 {
-    private readonly IFileStorage _fileStorage = new FileStorage();
-    private DatabaseStorage _databaseStorage = new DatabaseStorage("Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=postgres;");
+    private IDatabaseStorage _databaseStorage = new DatabaseStorage("Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=postgres;");
     public List<Song> _songList;
     
-    public async Task InitializeSongListFromFile()
-    {
-        _songList = await _fileStorage.InitializeFromFile();
-
-    }
 
     public async Task InitializeSongListFromDatabase()
     {
@@ -21,9 +15,9 @@ public class SongModel : ISongModel
     {
 
     }
-    public SongModel (IFileStorage FileStorage)
+    public SongModel (IDatabaseStorage databaseStorage)
     {
-        _fileStorage = FileStorage;
+        _databaseStorage = databaseStorage;
     }
 
     public async Task<Song> GetSongById(int id)

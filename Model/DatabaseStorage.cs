@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using Dapper;
 
-public class DatabaseStorage
+public class DatabaseStorage : IDatabaseStorage
 {   
     private readonly string _connectionString;
 

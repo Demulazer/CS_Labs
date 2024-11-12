@@ -39,8 +39,6 @@ public class DatabaseStorage
     }
 
 
-
-
     public async Task SaveSongsToDatabaseAsync(List<Song> songs)
     {
         using (var connection = CreateConnection())

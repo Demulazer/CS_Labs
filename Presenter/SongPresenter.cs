@@ -8,7 +8,6 @@ public class SongPresenter : ISongPresenter
 
     public SongPresenter()
     {
-        //_songModelLink.InitializeSongListFromFile();
         _songModelLink.InitializeSongListFromDatabase();
     }
     public SongPresenter(ISongModel songModel)

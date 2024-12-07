@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using Dapper;
 
-public class DatabaseStorage
+public class DatabaseStorage : IDatabaseStorage
 {   
     private readonly string _connectionString;
 
@@ -39,8 +39,6 @@ public class DatabaseStorage
     }
 
 
-
-
     public async Task SaveSongsToDatabaseAsync(List<Song> songs)
     {
         using (var connection = CreateConnection())
@@ -60,6 +58,103 @@ public class DatabaseStorage
             }
 
             Console.WriteLine("Successfully saved songs to the database.");
+        }
+    }
+    public async Task AddSongToDatabaseAsync(Song song)
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "INSERT INTO Songs (Id, SongName, SongAuthor) VALUES (@Id, @Name, @Author)";
+                
+            await connection.ExecuteAsync(query, new 
+            { 
+                Id = song.Id,
+                Name = song.SongName.Name, 
+                Author = song.SongAuthor.Author 
+            });
+
+            Console.WriteLine("Song added to the database.");
+        }
+    }
+    public async Task DeleteSongFromDatabaseAsync(Song song)
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "DELETE FROM Songs WHERE Id = @Id";
+                
+            await connection.ExecuteAsync(query, new { Id = song.Id });
+
+            Console.WriteLine($"Song with Id {song.Id} deleted from the database.");
+        }
+    }
+    public async Task<Song?> GetLastSongAsync()
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs ORDER BY Id DESC LIMIT 1";
+                
+            var result = await connection.QueryFirstOrDefaultAsync<(int Id, string Name, string Author)>(query);
+
+            return result != default 
+                ? new Song(
+                    result.Id, 
+                    new SongName(result.Name ), 
+                    new SongAuthor(result.Author))
+                : null;
+        }
+    }
+    public async Task<Song?> GetSongByIdAsync(int Id)
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs Where Id = @Id";
+                
+            var result = await connection.QueryFirstOrDefaultAsync<(int Id, string Name, string Author)>(query);
+
+            return result != default 
+                ? new Song(
+                    result.Id, 
+                    new SongName(result.Name ), 
+                    new SongAuthor(result.Author))
+                : null;
+        }
+    }
+    public async Task<List<Song>> FindSongsByNameAsync(string name)
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs WHERE SongName = @Name";
+
+            var result = await connection.QueryAsync<(int Id, string Name, string Author)>(query, new { Name = name });
+
+            var songs = result.Select(row =>
+                new Song(
+                    row.Id,
+                    new SongName(row.Name ),
+                    new SongAuthor(row.Author)
+                )).ToList();
+            if (songs.Count == 0) throw new ArgumentException();
+            return songs;
+        }
+    }
+
+    // Поиск всех песен по названию и автору
+    public async Task<List<Song>> FindSongsByNameAndAuthorAsync(string name, string author)
+    {
+        using (var connection = CreateConnection())
+        {
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs WHERE SongName = @Name AND SongAuthor = @Author";
+
+            var result = await connection.QueryAsync<(int Id, string Name, string Author)>(query, new { Name = name, Author = author });
+
+            var songs = result.Select(row =>
+                new Song(
+                    row.Id,
+                    new SongName(row.Name),
+                    new SongAuthor(row.Author)
+                )).ToList();
+
+            return songs;
         }
     }
 }

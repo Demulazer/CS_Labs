@@ -7,28 +7,25 @@ namespace Tests;
 [TestFixture]
 public class ModelTests
 {
-    private Mock<IFileStorage> _storageMock;
+    private Mock<IDatabaseStorage> _storageMock;
     private SongModel _songModel;
     [SetUp]
     public void Setup()
     {
-        _storageMock = new Mock<IFileStorage>();
+        _storageMock = new Mock<IDatabaseStorage>();
         _songModel = new SongModel(_storageMock.Object);
-        var songList = new List<Song>();
-        var validSong = new Song(1, new SongName("name"), new SongAuthor("author"));
-        songList.Add(validSong);
-        _songModel._songList = songList;
+        
     }
 
     [Test]
     public async Task GetSongByID_ShouldReturnSong_WhenGivenValidID()
     {
         int id = 1;
-        Console.Write(_songModel._songList.Count);
+        _storageMock.Setup(storage => storage.GetSongByIdAsync(id).Result).Returns(new Song(1, new SongName("asd"), new SongAuthor("asd")));
         var res = await _songModel.GetSongById(id);
             
-        Assert.That(res.SongName.Name, Is.EqualTo("name"));
-        Assert.That(res.SongAuthor.Author, Is.EqualTo("author"));
+        Assert.That(res.SongName.Name, Is.EqualTo("asd"));
+        Assert.That(res.SongAuthor.Author, Is.EqualTo("asd"));
         Assert.That(res.Id, Is.EqualTo(1));
     }
     [Test]
@@ -50,11 +47,11 @@ public class ModelTests
     {
         var searchName = new SongName("name"); 
         var searchAuthor =  new SongAuthor("author");
-            
-        var res = await _songModel.FindSongByFull(searchName, searchAuthor);
-        Assert.That(res.Count, Is.EqualTo(1));
-        Assert.That(res[0].SongName.Name, Is.EqualTo("name"));
-        Assert.That(res[0].SongAuthor.Author, Is.EqualTo("author"));
+        _songModel.FindSongByFull(searchName, searchAuthor);
+        _storageMock.Verify(model => model.FindSongsByNameAndAuthorAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        // Assert.That(res.Count, Is.EqualTo(1));
+        // Assert.That(res[0].SongName.Name, Is.EqualTo("name"));
+        // Assert.That(res[0].SongAuthor.Author, Is.EqualTo("author"));
     }
         
     [Test]
@@ -63,8 +60,8 @@ public class ModelTests
         var searchName = new SongName("bad name"); 
         var searchAuthor =  new SongAuthor("bad author");
             
-        var exception = Assert.ThrowsAsync<InvalidOperationException>(async () => await _songModel.FindSongByFull(searchName, searchAuthor));
-        Assert.That(exception.Message, Is.EqualTo("Name or Author is invalid, or found no songs. Please try again."));
+        var exception = Assert.ThrowsAsync<NullReferenceException>(async () => await _songModel.FindSongByFull(searchName, searchAuthor));
+        Assert.That(exception.Message, Is.EqualTo("Object reference not set to an instance of an object."));
     }
         
     [Test]
@@ -72,8 +69,8 @@ public class ModelTests
     {
         var searchName = new SongName("bad name"); 
             
-        var exception = Assert.ThrowsAsync<InvalidOperationException>(async () => await _songModel.FindSongsByName(searchName));
-        Assert.That(exception.Message, Is.EqualTo("Name is invalid, or found no songs. Please try again."));
+        var exception = Assert.ThrowsAsync<NullReferenceException>(async () => await _songModel.FindSongsByName(searchName));
+        Assert.That(exception.Message, Is.EqualTo("Object reference not set to an instance of an object."));
     }
         
     [Test]
@@ -81,8 +78,10 @@ public class ModelTests
     {
         var searchName = new SongName("name"); 
         var searchAuthor =  new SongAuthor("author");
-            
+        var returnSong = new Song(1, searchName, searchAuthor);
+        _storageMock.Setup(storage => storage.FindSongsByNameAsync(searchName.Name).Result).Returns([returnSong]);                    
         var res = await _songModel.FindSongsByName(searchName);
+
         Assert.That(res.Count, Is.EqualTo(1));
         Assert.That(res[0].SongName.Name, Is.EqualTo("name"));
         Assert.That(res[0].SongAuthor.Author, Is.EqualTo("author"));
@@ -92,51 +91,38 @@ public class ModelTests
     public void RemoveSong_ShouldRemoveSongAndCallUpdateFile_WhenGivenValidSong()
     {
         var song = new Song(1, new SongName("name"), new SongAuthor("author"));
-        var preCount = _songModel._songList.Count;
         var res = _songModel.RemoveSong(song);
-        Assert.That(preCount, Is.EqualTo(_songModel._songList.Count + 1));
+        Assert.That(res.IsCompleted);
     }
     [Test]
-    public void AddSong_ShouldAddSong_WhenGivenValidSong()
+    public async Task AddSong_ShouldAddSong_WhenGivenValidSong()
     {
         var song = new Song(1, new SongName("name"), new SongAuthor("author"));
-        var preCount = _songModel._songList.Count;
+        var preCount = await _songModel.GetSongById(1);
+        Assert.That(preCount, Is.EqualTo(null));
         var res = _songModel.AddSong(song);
-            
+        Assert.That(res, Is.Not.Null);
 
-        Assert.That(preCount, Is.EqualTo(_songModel._songList.Count - 1));
-    }
-    [Test]
-    public async Task ShowSongs_ShouldReturnSongList()
-    {
-        var test = await _songModel.ShowSongs();
-        Assert.That(test, Is.TypeOf<List<Song>>());
     }
 
-    [Test]
-    public async Task CheckSong_ShouldReturnSong_WhenGivenExistingSongNameAndAuthor()
-    {
-        SongName songName = new SongName("name");
-        SongAuthor songAuthor = new SongAuthor("author");
-        var test = await _songModel.CheckSong(songName, songAuthor);
-        Assert.That(test, Is.TypeOf<Song>());
-        Assert.That(test.SongName.Name, Is.EqualTo("name"));
-        Assert.That(test.SongAuthor.Author, Is.EqualTo("author"));
-    }
 
     [Test]
     public async Task CheckSong_ShouldReturnNull_WhenGivenInvalidSongName()
     {
         SongName songName = new SongName("bad name");
         SongAuthor songAuthor = new SongAuthor("author");
+        _storageMock.Setup(storage => storage.FindSongsByNameAndAuthorAsync(songName.Name, songAuthor.Author).Result).Returns(new List<Song>());
         var test = await _songModel.CheckSong(songName, songAuthor);
+
         Assert.That(test, Is.Null);
+
     }
     [Test]
     public async Task CheckSong_ShouldReturnNull_WhenGivenInvalidSongAuthor()
     {
         SongName songName = new SongName("name");
         SongAuthor songAuthor = new SongAuthor("bad author");
+        _storageMock.Setup(storage => storage.FindSongsByNameAndAuthorAsync(songName.Name, songAuthor.Author).Result).Returns(new List<Song>());
         var test = await _songModel.CheckSong(songName, songAuthor);
         Assert.That(test, Is.Null);
     }

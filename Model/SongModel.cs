@@ -3,7 +3,7 @@ namespace Model;
 
 public class SongModel : ISongModel
 {
-    private IDatabaseStorage _databaseStorage = new DatabaseStorage("Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=postgres;");
+    private IDatabaseStorage _databaseStorage = new DatabaseStorage("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=postgres;");
      
 
     public async Task InitializeSongListFromDatabase()
@@ -23,9 +23,13 @@ public class SongModel : ISongModel
     {
         return await _databaseStorage.GetSongByIdAsync(id);
     }
-    public int GetLastId()
+    public async Task<int> GetLastId()
     {
-        return _databaseStorage.GetLastSongAsync().Id;
+        var songToReturn = await _databaseStorage.GetLastSongAsync();
+        Console.WriteLine(songToReturn.Id + " " + songToReturn.SongName.Name + " " + songToReturn.SongAuthor.Author);
+        var songId = songToReturn.Id;
+        Console.WriteLine(songId);
+        return songId;
     }
     public async Task<List<Song>> FindSongByFull(SongName searchSongName, SongAuthor searchSongAuthor)
     {

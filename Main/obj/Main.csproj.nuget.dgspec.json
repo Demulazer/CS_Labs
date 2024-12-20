@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/demulazer/RiderProjects/Tests/Main/Main.csproj": {}
+    "/home/demulazer/RiderProjects/idk/Main/Main.csproj": {}
   },
   "projects": {
-    "/home/demulazer/RiderProjects/Tests/Main/Main.csproj": {
+    "/home/demulazer/RiderProjects/idk/Main/Main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/demulazer/RiderProjects/Tests/Main/Main.csproj",
+        "projectUniqueName": "/home/demulazer/RiderProjects/idk/Main/Main.csproj",
         "projectName": "Main",
-        "projectPath": "/home/demulazer/RiderProjects/Tests/Main/Main.csproj",
+        "projectPath": "/home/demulazer/RiderProjects/idk/Main/Main.csproj",
         "packagesPath": "/home/demulazer/.nuget/packages/",
-        "outputPath": "/home/demulazer/RiderProjects/Tests/Main/obj/",
+        "outputPath": "/home/demulazer/RiderProjects/idk/Main/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/demulazer/.nuget/NuGet/NuGet.Config"
@@ -26,14 +26,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {
-                "projectPath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj"
+              "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {
+                "projectPath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj"
               },
-              "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj": {
-                "projectPath": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj"
+              "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj": {
+                "projectPath": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj"
               },
-              "/home/demulazer/RiderProjects/Tests/View/View.csproj": {
-                "projectPath": "/home/demulazer/RiderProjects/Tests/View/View.csproj"
+              "/home/demulazer/RiderProjects/idk/View/View.csproj": {
+                "projectPath": "/home/demulazer/RiderProjects/idk/View/View.csproj"
               }
             }
           }
@@ -67,14 +67,14 @@
         }
       }
     },
-    "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {
+    "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj",
+        "projectUniqueName": "/home/demulazer/RiderProjects/idk/Model/Model.csproj",
         "projectName": "Model",
-        "projectPath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj",
+        "projectPath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj",
         "packagesPath": "/home/demulazer/.nuget/packages/",
-        "outputPath": "/home/demulazer/RiderProjects/Tests/Model/obj/",
+        "outputPath": "/home/demulazer/RiderProjects/idk/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/demulazer/.nuget/NuGet/NuGet.Config"
@@ -134,14 +134,14 @@
         }
       }
     },
-    "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj": {
+    "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj",
+        "projectUniqueName": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj",
         "projectName": "Presenter",
-        "projectPath": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj",
+        "projectPath": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj",
         "packagesPath": "/home/demulazer/.nuget/packages/",
-        "outputPath": "/home/demulazer/RiderProjects/Tests/Presenter/obj/",
+        "outputPath": "/home/demulazer/RiderProjects/idk/Presenter/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/demulazer/.nuget/NuGet/NuGet.Config"
@@ -156,8 +156,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {
-                "projectPath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj"
+              "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {
+                "projectPath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj"
               }
             }
           }
@@ -191,14 +191,14 @@
         }
       }
     },
-    "/home/demulazer/RiderProjects/Tests/View/View.csproj": {
+    "/home/demulazer/RiderProjects/idk/View/View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/demulazer/RiderProjects/Tests/View/View.csproj",
+        "projectUniqueName": "/home/demulazer/RiderProjects/idk/View/View.csproj",
         "projectName": "View",
-        "projectPath": "/home/demulazer/RiderProjects/Tests/View/View.csproj",
+        "projectPath": "/home/demulazer/RiderProjects/idk/View/View.csproj",
         "packagesPath": "/home/demulazer/.nuget/packages/",
-        "outputPath": "/home/demulazer/RiderProjects/Tests/View/obj/",
+        "outputPath": "/home/demulazer/RiderProjects/idk/View/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/demulazer/.nuget/NuGet/NuGet.Config"
@@ -213,8 +213,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj": {
-                "projectPath": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj"
+              "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj": {
+                "projectPath": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj"
               }
             }
           }
@@ -228,6 +228,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[6.0.0-preview.4.21253.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -240,6 +246,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

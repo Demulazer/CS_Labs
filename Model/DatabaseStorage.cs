@@ -62,6 +62,8 @@ public class DatabaseStorage : IDatabaseStorage
     }
     public async Task AddSongToDatabaseAsync(Song song)
     {
+        Console.WriteLine("Adding song to the database.");
+        Console.WriteLine("Debug - trying to add song " +  song.Id + " " + song.SongAuthor.Author + " " + song.SongName.Name);
         using (var connection = CreateConnection())
         {
             const string query = "INSERT INTO Songs (Id, SongName, SongAuthor) VALUES (@Id, @Name, @Author)";
@@ -94,23 +96,24 @@ public class DatabaseStorage : IDatabaseStorage
             const string query = "SELECT Id, SongName, SongAuthor FROM Songs ORDER BY Id DESC LIMIT 1";
                 
             var result = await connection.QueryFirstOrDefaultAsync<(int Id, string Name, string Author)>(query);
-
-            return result != default 
-                ? new Song(
+            Console.WriteLine("Debug - in getlastsongAsync " + result.Id + " " + result.Name);
+            return new Song(
                     result.Id, 
                     new SongName(result.Name ), 
                     new SongAuthor(result.Author))
-                : null;
+                ;
         }
     }
     public async Task<Song?> GetSongByIdAsync(int Id)
     {
         using (var connection = CreateConnection())
         {
+            Console.WriteLine("Debug - we are in DatabaseStorage, removing, getting song from the database.");
             const string query = "SELECT Id, SongName, SongAuthor FROM Songs Where Id = @Id";
                 
-            var result = await connection.QueryFirstOrDefaultAsync<(int Id, string Name, string Author)>(query);
-
+            var oldResult = await connection.QueryAsync<(int Id, string Name, string Author)>(query);
+            var result = oldResult.LastOrDefault();
+            Console.WriteLine("Debug, in DatabaseStorage - ", result.Id, result.Name, result.Author);
             return result != default 
                 ? new Song(
                     result.Id, 
@@ -123,8 +126,9 @@ public class DatabaseStorage : IDatabaseStorage
     {
         using (var connection = CreateConnection())
         {
-            const string query = "SELECT Id, SongName, SongAuthor FROM Songs WHERE SongName = @Name";
 
+            const string query = "SELECT Id, SongName, SongAuthor FROM Songs WHERE SongName::text LIKE @name";
+            name = "%" + name + "%";
             var result = await connection.QueryAsync<(int Id, string Name, string Author)>(query, new { Name = name });
 
             var songs = result.Select(row =>
@@ -133,7 +137,7 @@ public class DatabaseStorage : IDatabaseStorage
                     new SongName(row.Name ),
                     new SongAuthor(row.Author)
                 )).ToList();
-            if (songs.Count == 0) throw new ArgumentException();
+            if (songs.Count == 0) throw new ArgumentException("No songs found");
             return songs;
         }
     }

@@ -43,11 +43,11 @@ public class SongPresenter : ISongPresenter
         if (string.IsNullOrEmpty(findBy)) 
             throw new ArgumentException("The search term cannot be null or empty.");
         List<Song> songs;
-        if (findBy.Contains(" - "))
+        if (findBy.Contains('-'))
         {
             Console.WriteLine("Debug - Found both name and author");
 
-            var parts = findBy.Split(" - ");
+            var parts = findBy.Split("-");
             var songName = new SongName(parts[0]);
             var songAuthor = new SongAuthor(parts[1]);
 
@@ -83,7 +83,8 @@ public class SongPresenter : ISongPresenter
             throw new ArgumentException("Identical song already exists");
         }
 
-        var song = new Song(_songModelLink.GetLastId() + 1, new SongName(songName), new SongAuthor(songAuthor));
+        var song = new Song(await _songModelLink.GetLastId() + 1, new SongName(songName), new SongAuthor(songAuthor));
+        Console.WriteLine("Debug - adding song in presenter, id is " + song.Id );
         await _songModelLink.AddSong(song);
         
     }

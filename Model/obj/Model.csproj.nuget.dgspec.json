@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {}
+    "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {}
   },
   "projects": {
-    "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {
+    "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj",
+        "projectUniqueName": "/home/demulazer/RiderProjects/idk/Model/Model.csproj",
         "projectName": "Model",
-        "projectPath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj",
+        "projectPath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj",
         "packagesPath": "/home/demulazer/.nuget/packages/",
-        "outputPath": "/home/demulazer/RiderProjects/Tests/Model/obj/",
+        "outputPath": "/home/demulazer/RiderProjects/idk/Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/demulazer/.nuget/NuGet/NuGet.Config"

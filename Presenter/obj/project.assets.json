@@ -849,11 +849,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj",
+      "projectUniqueName": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj",
       "projectName": "Presenter",
-      "projectPath": "/home/demulazer/RiderProjects/Tests/Presenter/Presenter.csproj",
+      "projectPath": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj",
       "packagesPath": "/home/demulazer/.nuget/packages/",
-      "outputPath": "/home/demulazer/RiderProjects/Tests/Presenter/obj/",
+      "outputPath": "/home/demulazer/RiderProjects/idk/Presenter/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/demulazer/.nuget/NuGet/NuGet.Config"
@@ -868,8 +868,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/demulazer/RiderProjects/Tests/Model/Model.csproj": {
-              "projectPath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj"
+            "/home/demulazer/RiderProjects/idk/Model/Model.csproj": {
+              "projectPath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj"
             }
           }
         }

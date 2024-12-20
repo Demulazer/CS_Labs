@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rk21syTBg1w=",
+  "dgSpecHash": "/QJpK0cPo2g=",
   "success": true,
-  "projectFilePath": "/home/demulazer/RiderProjects/Tests/Model/Model.csproj",
+  "projectFilePath": "/home/demulazer/RiderProjects/idk/Model/Model.csproj",
   "expectedPackageFiles": [
     "/home/demulazer/.nuget/packages/dapper/2.1.35/dapper.2.1.35.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.entityframeworkcore/9.0.0-rc.2.24474.1/microsoft.entityframeworkcore.9.0.0-rc.2.24474.1.nupkg.sha512",

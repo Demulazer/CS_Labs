@@ -110,47 +110,13 @@ public class SongView : ISongView
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddEndpointsApiExplorer();
-        
+
         var app = builder.Build();
-        // app.UseHttpsRedirection();
-        // app.MapGet("/show", async () =>
-        // {
-        //     return await _songPresenterLink.ShowSongPresenter();
-        // }).WithName("ShowSongs");
-        // app.MapPut("/add", async (string songName, string songAuthor) =>
-        // {
-        //     if (string.IsNullOrEmpty(songName) || string.IsNullOrEmpty(songAuthor))
-        //         return Results.BadRequest("Invalid song data.");
-        //     await _songPresenterLink.AddSongPresenter(songName,songAuthor);
-        //     return Results.Ok("Song added successfully.");
-        //    
-        // }).WithName("AddSong");
-        // app.MapDelete("/delete-by-id", async (int id) =>
-        // {
-        //     if (id < 0)
-        //         return Results.BadRequest("Invalid id data.");
-        //     await _songPresenterLink.RemoveSongPresenter(id);
-        //     return Results.Ok("Song deleted by id successfully.");
-        // }).WithName("DeleteById");
-        //
-        // app.MapDelete("/delete-by-name-and-author", async (string name, string author) =>
-        // {
-        //     if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(author))
-        //         return Results.BadRequest("Invalid song data.");
-        //     await _songPresenterLink.RemoveSongPresenter(name, author);
-        //     return Results.Ok("Song deleted successfully.");
-        // }).WithName("DeleteByNameAndAuthor");
         AddEndpoint.Map(app);
         SearchEndpoint.Map(app);
         DeleteEndpoint.MapId(app);
         DeleteEndpoint.MapName(app);
         ShowEndpoint.Map(app);
-        // app.MapGet("/search", async (string find) =>
-        // {
-        //     if (string.IsNullOrEmpty(find))
-        //         return null;
-        //     return await _songPresenterLink.SongSearchPresenter(find);
-        // }).WithName("Search");
         app.Run();
     }
 }

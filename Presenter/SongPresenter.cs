@@ -80,7 +80,7 @@ public class SongPresenter : ISongPresenter
         if (await _songModelLink.CheckSong(new(songName), new(songAuthor)) != null)
         {
             Console.WriteLine("Debug - found identical song");
-            throw new ArgumentException("Identical song already exists");
+            return;
         }
 
         var song = new Song(await _songModelLink.GetLastId() + 1, new SongName(songName), new SongAuthor(songAuthor));

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "EQLro0XfhHk=",
+  "dgSpecHash": "19TS4p0Oj2BV7c3lWw0pDi80nicXmRNPEEwrdJIu83QSSFMV2RCmo9xsrzv1kjd4dXBRG+TOZ6WEr1WVehlPcg==",
   "success": true,
   "projectFilePath": "/home/demulazer/RiderProjects/idk/Presenter/Presenter.csproj",
   "expectedPackageFiles": [
+    "/home/demulazer/.nuget/packages/communitytoolkit.mvvm/8.4.0/communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "/home/demulazer/.nuget/packages/dapper/2.1.35/dapper.2.1.35.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.entityframeworkcore/9.0.0-rc.2.24474.1/microsoft.entityframeworkcore.9.0.0-rc.2.24474.1.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.0-rc.2.24474.1/microsoft.entityframeworkcore.abstractions.9.0.0-rc.2.24474.1.nupkg.sha512",

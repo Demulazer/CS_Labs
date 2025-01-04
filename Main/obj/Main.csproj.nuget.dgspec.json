@@ -101,6 +101,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.4.0, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.1.35, )"
@@ -229,6 +233,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.2.3, )"
+            },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[6.0.0-preview.4.21253.5, )"

@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "tr4jwfWULHE=",
+  "dgSpecHash": "kHcavEFU3j1c2eK/faLPj5tMMP0FOG+bQtyND8Nt40Kv8pi90m+MOBF6hurwoZ1Ke4qbpQoNVK5Z7WF6I40qNQ==",
   "success": true,
   "projectFilePath": "/home/demulazer/RiderProjects/idk/View/View.csproj",
   "expectedPackageFiles": [
+    "/home/demulazer/.nuget/packages/avalonia/11.2.3/avalonia.11.2.3.nupkg.sha512",
+    "/home/demulazer/.nuget/packages/avalonia.buildservices/0.0.29/avalonia.buildservices.0.0.29.nupkg.sha512",
+    "/home/demulazer/.nuget/packages/avalonia.remote.protocol/11.2.3/avalonia.remote.protocol.11.2.3.nupkg.sha512",
+    "/home/demulazer/.nuget/packages/communitytoolkit.mvvm/8.4.0/communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "/home/demulazer/.nuget/packages/dapper/2.1.35/dapper.2.1.35.nupkg.sha512",
+    "/home/demulazer/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.aspnetcore.http.features/6.0.0-preview.4.21253.5/microsoft.aspnetcore.http.features.6.0.0-preview.4.21253.5.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.entityframeworkcore/9.0.0-rc.2.24474.1/microsoft.entityframeworkcore.9.0.0-rc.2.24474.1.nupkg.sha512",
     "/home/demulazer/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.0-rc.2.24474.1/microsoft.entityframeworkcore.abstractions.9.0.0-rc.2.24474.1.nupkg.sha512",

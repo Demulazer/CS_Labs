@@ -25,8 +25,8 @@
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.AssemblyInfo.cs
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.csproj.CoreCompileInputs.cache
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.sourcelink.json
-/home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.csproj.CopyComplete
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.dll
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/refint/Presenter.dll
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.pdb
 /home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/ref/Presenter.dll
+/home/demulazer/RiderProjects/idk/Presenter/obj/Debug/net8.0/Presenter.csproj.Up2Date

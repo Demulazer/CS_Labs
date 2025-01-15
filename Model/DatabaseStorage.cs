@@ -112,8 +112,8 @@ public class DatabaseStorage : IDatabaseStorage
             const string query = "SELECT Id, SongName, SongAuthor FROM Songs Where Id = @Id";
                 
             var oldResult = await connection.QueryAsync<(int Id, string Name, string Author)>(query);
-            var result = oldResult.LastOrDefault();
-            Console.WriteLine("Debug, in DatabaseStorage - ", result.Id, result.Name, result.Author);
+            var result = oldResult.First();
+            Console.WriteLine("Debug, in DatabaseStorage - " + result.Id + result.Name + result.Author);
             return result != default 
                 ? new Song(
                     result.Id, 

@@ -7,7 +7,7 @@ using Presenter;
 namespace TestLib;
 
 public class ShowEndpoint
-{
+{       
     public static void Map(WebApplication app) => app
         .MapGet("/show", Handle);
     

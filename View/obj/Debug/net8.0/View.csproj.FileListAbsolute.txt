@@ -29,8 +29,9 @@
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.AssemblyInfo.cs
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.csproj.CoreCompileInputs.cache
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.sourcelink.json
-/home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.csproj.CopyComplete
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.dll
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/refint/View.dll
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.pdb
 /home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/ref/View.dll
+/home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/home/demulazer/RiderProjects/idk/View/obj/Debug/net8.0/View.csproj.Up2Date

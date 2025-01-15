@@ -27,7 +27,7 @@ public class SongPresenter : ISongPresenter
     }
     public async Task RemoveSongPresenter(int id)
     {
-        Console.WriteLine("Debug - we are in RemoveSongPresenter, id branch");
+        Console.WriteLine("Debug - we are in RemoveSongPresenter, id branch, removing id " + id);
         var song = await _songModelLink.GetSongById(id);
         Console.WriteLine("Debug - we are still in RemoveSongPresenter, id branch, found song by id " + song);
         if (song == null)
@@ -74,6 +74,7 @@ public class SongPresenter : ISongPresenter
 
     public async Task AddSongPresenter(string songName, string songAuthor)
     {
+        Console.WriteLine("DEBUG - We are in presenter adding song" + songName + ", " + songAuthor);
         if (string.IsNullOrEmpty(songName) || string.IsNullOrEmpty(songAuthor))
             throw new ArgumentException("Both name and author must be provided.");
         //TODO - что за warning Expression is always true according to nullable reference types' annotations?

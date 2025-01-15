@@ -1,0 +1,114 @@
+<!-- Leave the root-Node untouched beside setting Width, Height and Padding -->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GetStartedApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GetStartedApp"
+        xmlns:models="clr-namespace:GetStartedApp.Models"
+        mc:Ignorable="d"
+        Width="700" Height="610" Padding="4" 
+        x:Class="GetStartedApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SimpleSongList">
+        
+    
+    <Grid RowDefinitions="Auto, *, Auto, Auto, Auto" x:Name="Root">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!--  This is our title text block. We use Style.Classes to style it accordingly  -->
+        <TextBlock Classes="h1" Text="My very own Song-List" />
+        
+        <!-- Кнопка для отображения поиска -->
+        <Button Classes="Left" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding !IsSearchVisible}"
+                Content="Search"
+                Command="{Binding ToggleSearchCommand}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="4" />
+        
+        <!-- Поля для поиска -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" IsVisible="{Binding IsSearchVisible}" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     Margin="4"
+                     Text="{Binding SearchText}" 
+                     Watermark="Search by title" 
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Width="200" />
+
+            <TextBox Grid.Column="1"
+                     Margin="4"
+                     Text="{Binding SearchAuthor}" 
+                     Watermark="Search by artist" 
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Button Classes="Left"  Grid.Column="2" IsVisible="{Binding IsSearchVisible}"
+                    Content="back"
+                    Command="{Binding ToggleSearchCommand}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="4" />
+        </Grid>
+        <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="690" Margin="4" Height="480"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding FilteredSongs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Song">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" Margin="4" >
+                            <TextBlock Text="{Binding Title}" FontWeight="Bold" Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="{Binding Artist}" Foreground="Gray" Grid.Column="0" Grid.Row="1" />
+                            <Button Classes="Delete" Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveSongCommand}"
+                                    CommandParameter="{Binding }"
+                                    Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="4">
+                                    Delete song
+                                
+                            </Button> 
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        
+        
+        <TextBox Grid.Row="3" Grid.Column="0"
+                 Text="{Binding NewSongTitle}"
+                 Watermark="Enter Song Title"
+                 Width="300"
+                 />
+        
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 Text="{Binding NewSongArtist}"
+                 Watermark="Enter Artist Name"
+                 Width="300"
+                 >
+            <TextBox.InnerRightContent>
+                <Button Classes="Add" Grid.Row="3" Grid.Column="1" 
+                        Command="{Binding AddSongCommand}"
+                        Content="Add"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Width="80"
+                        Height="30"
+                        IsEnabled="{Binding CanAddSong}">
+                </Button>
+
+
+            </TextBox.InnerRightContent>
+            <TextBox.KeyBindings>
+                <KeyBinding Command="{Binding AddSongCommand}" Gesture="Enter" />
+            </TextBox.KeyBindings>
+        </TextBox>
+
+    </Grid>
+</Window>
